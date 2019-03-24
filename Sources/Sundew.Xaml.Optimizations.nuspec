@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+  <metadata>
+    <id>Sundew.Xaml.Optimizations</id>
+    <version>1.0.0</version>
+    <authors>Kim Hugener-Ohlsen</authors>
+    <owners>Kim Hugener-Ohlsen</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <projectUrl>https://github.com/hugener/Sundew.Xaml.Optimizations</projectUrl>
+    <description>Xaml Optimizations for ResourceDictionary.</description>
+    <summary>Xaml Optimizations</summary>
+    <releaseNotes>1.0.0 - Caching of merged ResourceDictionaries.</releaseNotes>
+    <copyright>Hukano</copyright>
+    <language>en-US</language>
+    <dependencies>
+      <dependency id="Sundew.Base" version="3.3.8" exclude="all"/>
+      <dependency id="Sundew.Xaml.Optimization" version="1.0.0" exclude="all"/>
+      <dependency id="Newtonsoft.Json" version="12.0.1" exclude="all"/>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="Sundew.Xaml.Wpf\bin\Release\Sundew.Xaml.Wpf.dll" target="lib\net40\Sundew.Xaml.Wpf.dll" />
+    <file src="Sundew.Xaml.Optimizations\bin\Release\*.dll" target="tools\" />
+    <file src="Sundew.Xaml.Optimizations\bin\Release\*.xml" target="tools\" />
+  </files>
+</package>
