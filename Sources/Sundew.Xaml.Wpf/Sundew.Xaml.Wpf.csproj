@@ -50,6 +50,7 @@
     <Compile Include="IThemeManager.cs" />
     <Compile Include="Optimizations\ResourceDictionary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ThemeChangedEventArgs.cs" />
     <Compile Include="ThemeInfo.cs" />
     <Compile Include="ThemeManager.cs" />
   </ItemGroup>

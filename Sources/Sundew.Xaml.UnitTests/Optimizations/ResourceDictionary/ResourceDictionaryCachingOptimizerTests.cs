@@ -18,17 +18,15 @@ namespace Sundew.Xaml.UnitTests.Optimizations.ResourceDictionary
 
     public class ResourceDictionaryCachingOptimizerTests
     {
-        public const string SundewXamlOptimizationWpfNamespace = "clr-namespace:Sundew.Xaml.Optimizations;assembly=Sundew.Xaml.Wpf";
-        public static readonly XNamespace WpfPresentationNamespace = "http://schemas.microsoft.com/winfx/2006/xaml/presentation";
         private readonly XamlPlatformInfo xamlPlatformInfo;
 
         public ResourceDictionaryCachingOptimizerTests()
         {
-            this.xamlPlatformInfo = new XamlPlatformInfo(XamlPlatform.WPF, WpfPresentationNamespace, SundewXamlOptimizationWpfNamespace);
+            this.xamlPlatformInfo = new XamlPlatformInfo(XamlPlatform.WPF, Constants.WpfPresentationNamespace, Constants.SundewXamlOptimizationWpfNamespace);
         }
 
         [Fact]
-        public void ResourceDictionary_When_ThereIsNothingToOptimize_Then_ResultShouldBeSameAsInput()
+        public void Optimize_When_ThereIsNothingToOptimize_Then_ResultShouldBeSameAsInput()
         {
             var input = $@"<ResourceDictionary 
     xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation"" 
@@ -44,45 +42,115 @@ namespace Sundew.Xaml.UnitTests.Optimizations.ResourceDictionary
             var xDocument = XDocument.Parse(input);
             var testee = new ResourceDictionaryCachingOptimizer(this.xamlPlatformInfo);
 
-            var result = testee.Optimize(new FileInfo(@"c:\temp\sample.cs"), xDocument, new DirectoryInfo(Environment.CurrentDirectory));
+            var result = testee.Optimize(xDocument, new FileInfo(@"c:\temp\sample.cs"), new DirectoryInfo(Environment.CurrentDirectory), null);
 
             result.Error.XDocument.ToString().Should().Be(XDocument.Parse(input).ToString());
         }
 
-        [Fact]
-        public void Application_When_ThereIsOneMergedResourceDictionary_Then_ResultShouldBeExpectedResult()
+        [Theory]
+        [InlineData("Application")]
+        [InlineData("UserControl")]
+        [InlineData("Page")]
+        [InlineData("Window")]
+        public void Optimize_When_ThereAreNestedMergedResourceDictionaries_Then_ResultShouldBeExpectedResult(string rootType)
         {
-            var input = $@"<Application x:Class=""Sundew.Xaml.Sample.App""
+            var input = $@"<{rootType}
     xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation""
-    xmlns:x=""http://schemas.microsoft.com/winfx/2006/xaml"" 
-    StartupUri=""MainWindow.xaml"">
-    <Application.Resources>
+    xmlns:x=""http://schemas.microsoft.com/winfx/2006/xaml""
+    xmlns:d=""http://schemas.microsoft.com/expression/blend/2008"" 
+    xmlns:mc=""http://schemas.openxmlformats.org/markup-compatibility/2006""
+    x:Class=""Sundew.Xaml.Sample.MainWindow""
+    mc:Ignorable=""d"" Title=""MainWindow"" Height=""450"" Width=""800"">
+    <{rootType}.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source=""/Sundew.Xaml.Sample.Wpf;component/Controls.xaml"" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </Application.Resources>
-</Application>";
+    </{rootType}.Resources>
+    <Grid>
+        <Grid.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source=""/Sundew.Xaml.Sample.Wpf;component/Controls2.xaml"" />
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </Grid.Resources>
+    </Grid>
+</{rootType}>";
 
-            var expectedResult = $@"<Application x:Class=""Sundew.Xaml.Sample.App""
+            var expectedResult = $@"<{rootType}
     xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation""
-    xmlns:x=""http://schemas.microsoft.com/winfx/2006/xaml"" 
-    xmlns:sxo=""clr-namespace:Sundew.Xaml.Optimizations;assembly=Sundew.Xaml.Wpf""
-    StartupUri=""MainWindow.xaml"">
-    <Application.Resources>
+    xmlns:x=""http://schemas.microsoft.com/winfx/2006/xaml""
+    xmlns:d=""http://schemas.microsoft.com/expression/blend/2008"" 
+    xmlns:mc=""http://schemas.openxmlformats.org/markup-compatibility/2006""
+    xmlns:sx=""clr-namespace:Sundew.Xaml.Optimizations;assembly=Sundew.Xaml.Wpf""
+    x:Class=""Sundew.Xaml.Sample.MainWindow""
+    mc:Ignorable=""d"" Title=""MainWindow"" Height=""450"" Width=""800"">
+    <{rootType}.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <sxo:ResourceDictionary Source=""/Sundew.Xaml.Sample.Wpf;component/Controls.xaml"" />
+                <sx:ResourceDictionary Source=""/Sundew.Xaml.Sample.Wpf;component/Controls.xaml"" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </Application.Resources>
-</Application>";
+    </{rootType}.Resources>
+    <Grid>
+        <Grid.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <sx:ResourceDictionary Source=""/Sundew.Xaml.Sample.Wpf;component/Controls2.xaml"" />
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </Grid.Resources>
+    </Grid>
+</{rootType}>";
 
             var xDocument = XDocument.Parse(input);
             var testee = new ResourceDictionaryCachingOptimizer(this.xamlPlatformInfo);
 
-            var result = testee.Optimize(new FileInfo(@"c:\temp\sample.cs"), xDocument, new DirectoryInfo(Environment.CurrentDirectory));
+            var result = testee.Optimize(xDocument, new FileInfo(@"c:\temp\sample.cs"), new DirectoryInfo(Environment.CurrentDirectory), null);
+
+            result.Value.XDocument.ToString().Should().Be(XDocument.Parse(expectedResult).ToString());
+        }
+
+        [Theory]
+        [InlineData("Application")]
+        [InlineData("UserControl")]
+        [InlineData("Page")]
+        [InlineData("Window")]
+        public void Optimize_When_ThereIsOneMergedResourceDictionary_Then_ResultShouldBeExpectedResult(string rootType)
+        {
+            var input = $@"<{rootType} x:Class=""Sundew.Xaml.Optimizer.Sample""
+    xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation""
+    xmlns:x=""http://schemas.microsoft.com/winfx/2006/xaml"" 
+    StartupUri=""MainWindow.xaml"">
+    <{rootType}.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source=""/Sundew.Xaml.Sample.Wpf;component/Controls.xaml"" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </{rootType}.Resources>
+</{rootType}>";
+
+            var expectedResult = $@"<{rootType} x:Class=""Sundew.Xaml.Optimizer.Sample""
+    xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation""
+    xmlns:x=""http://schemas.microsoft.com/winfx/2006/xaml"" 
+    xmlns:sx=""clr-namespace:Sundew.Xaml.Optimizations;assembly=Sundew.Xaml.Wpf""
+    StartupUri=""MainWindow.xaml"">
+    <{rootType}.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <sx:ResourceDictionary Source=""/Sundew.Xaml.Sample.Wpf;component/Controls.xaml"" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </{rootType}.Resources>
+</{rootType}>";
+
+            var xDocument = XDocument.Parse(input);
+            var testee = new ResourceDictionaryCachingOptimizer(this.xamlPlatformInfo);
+
+            var result = testee.Optimize(xDocument, new FileInfo(@"c:\temp\sample.cs"), new DirectoryInfo(Environment.CurrentDirectory), null);
 
             result.Value.XDocument.ToString().Should().Be(XDocument.Parse(expectedResult).ToString());
         }

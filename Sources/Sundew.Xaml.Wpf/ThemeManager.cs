@@ -35,6 +35,9 @@ namespace Sundew.Xaml
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>Occurs when the theme has changed.</summary>
+        public event EventHandler<ThemeChangedEventArgs> ThemeChanged;
+
         /// <summary>
         /// Gets the theme infos.
         /// </summary>
@@ -73,9 +76,11 @@ namespace Sundew.Xaml
 
             if (themeInfo.Theme != null)
             {
+                var oldThemeInfo = this.currentThemeInfo;
                 this.currentThemeInfo = themeInfo;
                 Application.Current.Resources.MergedDictionaries.Add(this.currentThemeInfo.Theme);
                 this.NotifyPropertyChanged(nameof(this.CurrentTheme));
+                this.ThemeChanged?.Invoke(this, new ThemeChangedEventArgs(oldThemeInfo, themeInfo));
             }
         }
 

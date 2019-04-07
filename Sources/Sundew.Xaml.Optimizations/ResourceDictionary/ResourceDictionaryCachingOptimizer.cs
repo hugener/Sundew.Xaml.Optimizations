@@ -23,7 +23,6 @@ namespace Sundew.Xaml.Optimizations.ResourceDictionary
     public class ResourceDictionaryCachingOptimizer : IXamlOptimizer
     {
         private readonly XamlPlatformInfo xamlPlatformInfo;
-        private readonly XName frameworkResourceDictionaryName;
         private readonly XName sundewXamlResourceDictionaryName;
 
         /// <summary>Initializes a new instance of the <see cref="ResourceDictionaryCachingOptimizer"/> class.</summary>
@@ -31,8 +30,7 @@ namespace Sundew.Xaml.Optimizations.ResourceDictionary
         public ResourceDictionaryCachingOptimizer(XamlPlatformInfo xamlPlatformInfo)
         {
             this.xamlPlatformInfo = xamlPlatformInfo;
-            this.frameworkResourceDictionaryName = xamlPlatformInfo.PresentationNamespace + Constants.ResourceDictionary;
-            this.sundewXamlResourceDictionaryName = xamlPlatformInfo.SundewXamlOptimizationsNamespace + Constants.ResourceDictionary;
+            this.sundewXamlResourceDictionaryName = xamlPlatformInfo.SundewXamlOptimizationsNamespace + Constants.ResourceDictionaryName;
         }
 
         /// <summary>Gets the supported platforms.</summary>
@@ -40,32 +38,32 @@ namespace Sundew.Xaml.Optimizations.ResourceDictionary
         public IReadOnlyList<XamlPlatform> SupportedPlatforms { get; } = new List<XamlPlatform> { XamlPlatform.WPF };
 
         /// <summary>Optimizes the xml document.</summary>
+        /// <param name="xDocument">The xml document.</param>
         /// <param name="fileInfo">The file info.</param>
-        /// <param name="xDocument">The input path.</param>
         /// <param name="intermediateDirectory">The intermediate directory.</param>
+        /// <param name="assemblyReferences">The assembly references.</param>
         /// <returns>A result with the optimized <see cref="XDocument"/>, if successful.</returns>
-        public Result<XamlOptimization> Optimize(FileInfo fileInfo, XDocument xDocument, DirectoryInfo intermediateDirectory)
+        public Result<XamlOptimization> Optimize(XDocument xDocument, FileInfo fileInfo, DirectoryInfo intermediateDirectory, IReadOnlyList<IAssemblyReference> assemblyReferences)
         {
             var mergedResourceDictionaries = xDocument.XPathSelectElements(
                 Constants.SystemResourceDictionaryMergedDictionariesSystemResourceDictionaryXPath,
-                this.xamlPlatformInfo.XmlNamespaceManager);
+                this.xamlPlatformInfo.XmlNamespaceResolver);
             var hasBeenOptimized = false;
             var hasSxoNamespace = false;
             foreach (var xElement in mergedResourceDictionaries.ToList())
             {
                 var optimization = OptimizationProvider.GetOptimizationInfo(
                     xElement,
-                    this.frameworkResourceDictionaryName);
+                    this.xamlPlatformInfo.SystemResourceDictionaryName);
                 switch (optimization.OptimizationMode)
                 {
                     case OptimizationMode.Shared:
                         if (!hasSxoNamespace)
                         {
-                            xDocument.Root.TryAddXmlNamespace(
-                                Constants.SxoAttributeName,
+                            xDocument.Root.EnsureXmlNamespaceAttribute(
                                 this.xamlPlatformInfo.SundewXamlOptimizationsNamespace,
-                                Constants.XAttributeName,
-                                Constants.MaxAttributePosition);
+                                Constants.SxPrefix,
+                                this.xamlPlatformInfo.DefaultInsertAfterNamespaces);
                             hasSxoNamespace = true;
                         }
 
