@@ -84,13 +84,13 @@ namespace Sundew.Xaml.UnitTests.Optimizations.ResourceDictionary
     xmlns:x=""http://schemas.microsoft.com/winfx/2006/xaml""
     xmlns:d=""http://schemas.microsoft.com/expression/blend/2008"" 
     xmlns:mc=""http://schemas.openxmlformats.org/markup-compatibility/2006""
-    xmlns:sx=""clr-namespace:Sundew.Xaml.Optimizations;assembly=Sundew.Xaml.Wpf""
+    xmlns:sxo=""clr-namespace:Sundew.Xaml.Optimizations;assembly=Sundew.Xaml.Wpf""
     x:Class=""Sundew.Xaml.Sample.MainWindow""
     mc:Ignorable=""d"" Title=""MainWindow"" Height=""450"" Width=""800"">
     <{rootType}.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <sx:ResourceDictionary Source=""/Sundew.Xaml.Sample.Wpf;component/Controls.xaml"" />
+                <sxo:ResourceDictionary Source=""/Sundew.Xaml.Sample.Wpf;component/Controls.xaml"" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </{rootType}.Resources>
@@ -98,7 +98,7 @@ namespace Sundew.Xaml.UnitTests.Optimizations.ResourceDictionary
         <Grid.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
-                    <sx:ResourceDictionary Source=""/Sundew.Xaml.Sample.Wpf;component/Controls2.xaml"" />
+                    <sxo:ResourceDictionary Source=""/Sundew.Xaml.Sample.Wpf;component/Controls2.xaml"" />
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
         </Grid.Resources>
@@ -136,12 +136,12 @@ namespace Sundew.Xaml.UnitTests.Optimizations.ResourceDictionary
             var expectedResult = $@"<{rootType} x:Class=""Sundew.Xaml.Optimizer.Sample""
     xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation""
     xmlns:x=""http://schemas.microsoft.com/winfx/2006/xaml"" 
-    xmlns:sx=""clr-namespace:Sundew.Xaml.Optimizations;assembly=Sundew.Xaml.Wpf""
+    xmlns:sxo=""clr-namespace:Sundew.Xaml.Optimizations;assembly=Sundew.Xaml.Wpf""
     StartupUri=""MainWindow.xaml"">
     <{rootType}.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <sx:ResourceDictionary Source=""/Sundew.Xaml.Sample.Wpf;component/Controls.xaml"" />
+                <sxo:ResourceDictionary Source=""/Sundew.Xaml.Sample.Wpf;component/Controls.xaml"" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </{rootType}.Resources>

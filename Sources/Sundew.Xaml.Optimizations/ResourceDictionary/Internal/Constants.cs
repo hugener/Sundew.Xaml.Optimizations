@@ -14,7 +14,7 @@ namespace Sundew.Xaml.Optimizations.ResourceDictionary.Internal
         public const string SourceText = "Source";
         public const string SystemResourceDictionaryMergedDictionariesSystemResourceDictionaryXPath = "//system:ResourceDictionary/system:ResourceDictionary.MergedDictionaries/system:ResourceDictionary";
         public const string UnsharedWpfText = "UnsharedWpf";
-        public const string SxPrefix = "sx";
+        public const string SxoPrefix = "sxo";
         public const string ResourceDictionaryName = "ResourceDictionary";
         public static readonly Regex UriRegex = new Regex("^.+;component/(?:(?<UnsharedWpf>.*Unshared.+)|(?:.+))$");
     }

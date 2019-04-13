@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
   <metadata>
     <id>Sundew.Xaml.Optimizations</id>
-    <version>2.0.0</version>
+    <version>2.0.1</version>
     <authors>Kim Hugener-Ohlsen</authors>
     <owners>Kim Hugener-Ohlsen</owners>
     <developmentDependency>true</developmentDependency>
@@ -11,14 +11,14 @@
     <description>Various Xaml optimizations.
 - ResourceDictionaryCachingOptimizer
 - FreezeResourceOptimizer</description>
-    <summary>Xaml Optimizations</summary>
+    <summary>Xaml optimizations for caching resource dictionaries and freezing Freezables.</summary>
     <releaseNotes>2.0.0 - Added optimizer for freezing Freezables per default.
 1.0.0 - Caching of merged ResourceDictionaries.</releaseNotes>
     <copyright>Hukano</copyright>
     <language>en-US</language>
   </metadata>
   <files>
-    <file src="Sundew.Xaml.Wpf\bin\Release\Sundew.Xaml.Wpf.dll" target="lib\net40\Sundew.Xaml.Wpf.dll" />
+    <file src="Sundew.Xaml.Wpf\bin\Release\Sundew.Xaml.Wpf.dll" target="lib\net461\Sundew.Xaml.Wpf.dll" />
     <file src="Sundew.Xaml.Optimizations\bin\Release\*.dll" target="tools\" />
     <file src="Sundew.Xaml.Optimizations\bin\Release\*.xml" target="tools\" />
   </files>

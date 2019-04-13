@@ -62,7 +62,7 @@ namespace Sundew.Xaml.Optimizations.ResourceDictionary
                         {
                             xDocument.Root.EnsureXmlNamespaceAttribute(
                                 this.xamlPlatformInfo.SundewXamlOptimizationsNamespace,
-                                Constants.SxPrefix,
+                                Constants.SxoPrefix,
                                 this.xamlPlatformInfo.DefaultInsertAfterNamespaces);
                             hasSxoNamespace = true;
                         }
