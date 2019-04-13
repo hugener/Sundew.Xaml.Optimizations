@@ -1,5 +1,6 @@
 # Sundew.Xaml.Optimizations
-
+## Usage
+Refer to the sample for how to use optimizations: https://github.com/hugener/Sundew.Xaml.Optimizer.Sample
 ## Supported optimizations:
 ### ResourceDictionaryCachingOptimizer
 The ResourceDictionaryCachingOptimizer enables caching for merged ResourceDictionaries and has the following advantages:
