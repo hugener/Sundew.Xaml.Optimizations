@@ -7,8 +7,6 @@
 
 namespace Sundew.Xaml.UnitTests.Optimizations.ResourceDictionary
 {
-    using System;
-    using System.IO;
     using System.Xml.Linq;
     using FluentAssertions;
     using Sundew.Xaml.Optimization;
@@ -40,11 +38,11 @@ namespace Sundew.Xaml.UnitTests.Optimizations.ResourceDictionary
 </ResourceDictionary>";
 
             var xDocument = XDocument.Parse(input);
-            var testee = new ResourceDictionaryCachingOptimizer(this.xamlPlatformInfo);
+            var testee = new ResourceDictionaryCachingOptimization(this.xamlPlatformInfo);
 
-            var result = testee.Optimize(xDocument, new FileInfo(@"c:\temp\sample.cs"), new DirectoryInfo(Environment.CurrentDirectory), null);
+            var result = testee.Optimize(xDocument, null);
 
-            result.Error.XDocument.ToString().Should().Be(XDocument.Parse(input).ToString());
+            result.XDocument.ToString().Should().Be(XDocument.Parse(input).ToString());
         }
 
         [Theory]
@@ -106,11 +104,11 @@ namespace Sundew.Xaml.UnitTests.Optimizations.ResourceDictionary
 </{rootType}>";
 
             var xDocument = XDocument.Parse(input);
-            var testee = new ResourceDictionaryCachingOptimizer(this.xamlPlatformInfo);
+            var testee = new ResourceDictionaryCachingOptimization(this.xamlPlatformInfo);
 
-            var result = testee.Optimize(xDocument, new FileInfo(@"c:\temp\sample.cs"), new DirectoryInfo(Environment.CurrentDirectory), null);
+            var result = testee.Optimize(xDocument, null);
 
-            result.Value.XDocument.ToString().Should().Be(XDocument.Parse(expectedResult).ToString());
+            result.XDocument.ToString().Should().Be(XDocument.Parse(expectedResult).ToString());
         }
 
         [Theory]
@@ -148,11 +146,11 @@ namespace Sundew.Xaml.UnitTests.Optimizations.ResourceDictionary
 </{rootType}>";
 
             var xDocument = XDocument.Parse(input);
-            var testee = new ResourceDictionaryCachingOptimizer(this.xamlPlatformInfo);
+            var testee = new ResourceDictionaryCachingOptimization(this.xamlPlatformInfo);
 
-            var result = testee.Optimize(xDocument, new FileInfo(@"c:\temp\sample.cs"), new DirectoryInfo(Environment.CurrentDirectory), null);
+            var result = testee.Optimize(xDocument, null);
 
-            result.Value.XDocument.ToString().Should().Be(XDocument.Parse(expectedResult).ToString());
+            result.XDocument.ToString().Should().Be(XDocument.Parse(expectedResult).ToString());
         }
     }
 }

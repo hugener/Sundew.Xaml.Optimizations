@@ -104,7 +104,7 @@ namespace Sundew.Xaml.Optimizations
             {
                 lock (LockObject)
                 {
-                    if (!entry.ReferencingResourceDictionaries.Any())
+                    if (entry.ReferencingResourceDictionaries.Count == 0)
                     {
                         return ResourceDictionaries.TryRemove(source, out _);
                     }

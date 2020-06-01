@@ -1,0 +1,76 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>Sundew.Xaml.Optimizations.TestData</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG;DEBUG_SXO</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG;DEBUG_SXO</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Sundew.Xaml.Optimizations.TestData.ApiDesigner.Wpf\Annotations.cs" Link="Annotations.cs" />
+    <Compile Include="..\Sundew.Xaml.Optimizations.TestData.ApiDesigner.Wpf\App.xaml.cs" Link="App.xaml.cs" />
+    <Compile Include="..\Sundew.Xaml.Optimizations.TestData.ApiDesigner.Wpf\Bouncer\ActualSize.cs" Link="Bouncer\ActualSize.cs" />
+    <Compile Include="..\Sundew.Xaml.Optimizations.TestData.ApiDesigner.Wpf\Bouncer\AnimationViewModel.cs" Link="Bouncer\AnimationViewModel.cs" />
+    <Compile Include="..\Sundew.Xaml.Optimizations.TestData.ApiDesigner.Wpf\Bouncer\CompiledBouncerControl.xaml.cs" Link="Bouncer\CompiledBouncerControl.xaml.cs" />
+    <Compile Include="..\Sundew.Xaml.Optimizations.TestData.ApiDesigner.Wpf\Bouncer\CompiledBouncerControlBindingConnector.cs" Link="Bouncer\CompiledBouncerControlBindingConnector.cs" />
+    <Compile Include="..\Sundew.Xaml.Optimizations.TestData.ApiDesigner.Wpf\Bouncer\ElementViewModel.cs" Link="Bouncer\ElementViewModel.cs" />
+    <Compile Include="..\Sundew.Xaml.Optimizations.TestData.ApiDesigner.Wpf\Bouncer\ReflectionBouncerControl.xaml.cs" Link="Bouncer\ReflectionBouncerControl.xaml.cs" />
+    <Compile Include="..\Sundew.Xaml.Optimizations.TestData.ApiDesigner.Wpf\Bouncer\TrackerViewModel.cs" Link="Bouncer\TrackerViewModel.cs" />
+    <Compile Include="..\Sundew.Xaml.Optimizations.TestData.ApiDesigner.Wpf\Command.cs" Link="Command.cs" />
+    <Compile Include="..\Sundew.Xaml.Optimizations.TestData.ApiDesigner.Wpf\CultureInfoDateTimeConverter.cs" Link="CultureInfoDateTimeConverter.cs" />
+    <Compile Include="..\Sundew.Xaml.Optimizations.TestData.ApiDesigner.Wpf\DemoViewModel.cs" Link="DemoViewModel.cs" />
+    <Compile Include="..\Sundew.Xaml.Optimizations.TestData.ApiDesigner.Wpf\DemoWindow.xaml.cs" Link="DemoWindow.xaml.cs" />
+    <Compile Include="..\Sundew.Xaml.Optimizations.TestData.ApiDesigner.Wpf\NotNullToVisibilityConverter.cs" Link="NotNullToVisibilityConverter.cs" />
+    <Compile Include="..\Sundew.Xaml.Optimizations.TestData.ApiDesigner.Wpf\TextWindow.xaml.cs" Link="TextWindow.xaml.cs" />
+    <Compile Include="..\Sundew.Xaml.Optimizations.TestData.ApiDesigner.Wpf\Todos\CompiledTodosControl.xaml.cs" Link="Todos\CompiledTodosControl.xaml.cs" />
+    <Compile Include="..\Sundew.Xaml.Optimizations.TestData.ApiDesigner.Wpf\Todos\CompiledTodosControlBindingConnector.cs" Link="Todos\CompiledTodosControlBindingConnector.cs" />
+    <Compile Include="..\Sundew.Xaml.Optimizations.TestData.ApiDesigner.Wpf\Todos\ITodo.cs" Link="Todos\ITodo.cs" />
+    <Compile Include="..\Sundew.Xaml.Optimizations.TestData.ApiDesigner.Wpf\Todos\ITodosViewModel.cs" Link="Todos\ITodosViewModel.cs" />
+    <Compile Include="..\Sundew.Xaml.Optimizations.TestData.ApiDesigner.Wpf\Todos\ReflectionTodosControl.xaml.cs" Link="Todos\ReflectionTodosControl.xaml.cs" />
+    <Compile Include="..\Sundew.Xaml.Optimizations.TestData.ApiDesigner.Wpf\Todos\Todo.cs" Link="Todos\Todo.cs" />
+    <Compile Include="..\Sundew.Xaml.Optimizations.TestData.ApiDesigner.Wpf\Todos\CompiledTodoDataTemplateBindingConnector.cs" Link="Todos\CompiledTodoDataTemplateBindingConnector.cs" />
+    <Compile Include="..\Sundew.Xaml.Optimizations.TestData.ApiDesigner.Wpf\Todos\TodosViewModel.cs" Link="Todos\TodosViewModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Bouncer\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ApplicationDefinition Include="..\Sundew.Xaml.Optimizations.TestData.ApiDesigner.Wpf\App.xaml" Link="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </ApplicationDefinition>
+    <PackageReference Include="Sundew.Xaml.Optimizer" Version="3.0.0-pre-u20200525-103306">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>compile; runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <Page Include="..\Sundew.Xaml.Optimizations.TestData.ApiDesigner.Wpf\Bouncer\CompiledBouncerControl.xaml" Link="Bouncer\CompiledBouncerControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="..\Sundew.Xaml.Optimizations.TestData.ApiDesigner.Wpf\Bouncer\ReflectionBouncerControl.xaml" Link="Bouncer\ReflectionBouncerControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="..\Sundew.Xaml.Optimizations.TestData.ApiDesigner.Wpf\DemoWindow.xaml" Link="DemoWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="..\Sundew.Xaml.Optimizations.TestData.ApiDesigner.Wpf\TextWindow.xaml" Link="TextWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="..\Sundew.Xaml.Optimizations.TestData.ApiDesigner.Wpf\Todos\CompiledTodosControl.xaml" Link="Todos\CompiledTodosControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="..\Sundew.Xaml.Optimizations.TestData.ApiDesigner.Wpf\Todos\ReflectionTodosControl.xaml" Link="Todos\ReflectionTodosControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+</Project>

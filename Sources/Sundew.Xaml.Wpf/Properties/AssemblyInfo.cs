@@ -17,7 +17,7 @@ using Sundew.Xaml;
 [assembly: AssemblyTitle("Sundew.Xaml.Wpf")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Hukano")]
 [assembly: AssemblyProduct("Sundew.Xaml.Wpf")]
 [assembly: AssemblyCopyright("Copyright © Hukano 2017")]
 [assembly: AssemblyTrademark("")]
@@ -41,8 +41,8 @@ using Sundew.Xaml;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2.0.0.0")]
-[assembly: AssemblyFileVersion("2.0.0.0")]
+[assembly: AssemblyVersion("3.0.0.0")]
+[assembly: AssemblyFileVersion("3.0.0.0")]
 [assembly: XmlnsDefinition(Constants.SundewXamlXmlNamespace, "Sundew.Xaml")]
 [assembly: XmlnsPrefix(Constants.SundewXamlXmlNamespace, "sx")]
 [assembly: InternalsVisibleTo("Sundew.Xaml.UnitTests")]

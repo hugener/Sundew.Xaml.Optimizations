@@ -1,77 +1,86 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9842B2BB-050E-41E3-A1B7-FCB5E54F1AF9}</ProjectGuid>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>3.0.0</Version>
+    <LangVersion>8</LangVersion>
+    <Authors>Kim Hugener-Ohlsen</Authors>
+    <Company>Hukano</Company>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>
+      Various Xaml optimizations.
+      - ResourceDictionaryCachingOptimizer
+      - FreezeResourceOptimizer
+      - BindingCompilerOptimizer
+    </Description>
+    <PackageReleaseNotes>3.0 - Support for compiled bindings
+2.0 - Added optimizer for freezing Freezables per default.
+1.0 - Caching of merged ResourceDictionaries.
+</PackageReleaseNotes>
+    <AssemblyVersion>3.0.0.0</AssemblyVersion>
+    <FileVersion>3.0.0.0</FileVersion>
+    <NuspecFile>Sundew.Xaml.Optimizations.nuspec</NuspecFile>
+    <OutputPath>bin\$(Configuration)</OutputPath>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <Owners>Kim Hugener-Ohlsen</Owners>
+    <Copyright>Kim Hugener-Ohlsen</Copyright>
+    <RepositoryUrl>https://github.com/hugener/Sundew.Xaml.Optimizations</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/hugener/Sundew.Xaml.Optimizations</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <RepositoryType>git</RepositoryType>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sundew.Xaml.Optimizations</RootNamespace>
-    <AssemblyName>Sundew.Xaml.Optimizations</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>bin\Debug\Sundew.Xaml.Optimizations.xml</DocumentationFile>
+    <WarningsAsErrors />
+    <DocumentationFile>bin\Debug\$(TargetFramework)\Sundew.Xaml.Wpf.xml</DocumentationFile>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\$(TargetFramework)\Sundew.Xaml.Wpf.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>bin\Release\Sundew.Xaml.Optimizations.xml</DocumentationFile>
+    <WarningsAsErrors />
   </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="PresentationCore" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Freezing\FreezeResourceOptimizer.DefaultFreezables.cs" />
-    <Compile Include="Freezing\Internal\Constants.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Freezing\FreezeResourceOptimizer.cs" />
-    <Compile Include="ResourceDictionary\Internal\Constants.cs" />
-    <Compile Include="Freezing\FreezeResourceSettings.cs" />
-    <Compile Include="ResourceDictionary\Internal\OptimizationInfo.cs" />
-    <Compile Include="ResourceDictionary\Internal\OptimizationMode.cs" />
-    <Compile Include="ResourceDictionary\Internal\OptimizationProvider.cs" />
-    <Compile Include="ResourceDictionary\ResourceDictionaryCachingOptimizer.cs" />
-  </ItemGroup>
-  <ItemGroup>
+    <PackageReference Include="ILRepack.Lib.MSBuild.Task" Version="2.0.18.1" />
+    <PackageReference Include="Microsoft.CodeAnalysis" Version="3.5.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="StyleCop.Analyzers">
-      <Version>1.1.1-rc.114</Version>
+      <Version>1.2.0-beta.164</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Sundew.Base">
-      <Version>3.3.8</Version>
+      <Version>4.2.1-pre-u20200518-203216</Version>
+    </PackageReference>
+    <PackageReference Include="Sundew.Build.Publish" Version="2.0.1-pre-u20200521-203716">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Sundew.Xaml.Optimization">
-      <Version>2.0.0</Version>
+      <Version>3.0.0-pre-u20200522-062754</Version>
     </PackageReference>
+    <PackageReference Include="System.IO.Abstractions" Version="10.0.1" />
   </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="stylecop.json" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
+
+  <Target Name="SetNuspecProperties" AfterTargets="SbpPreparePublishNuGet">
+    <PropertyGroup>
+      <NuspecProperties>$(NuspecProperties);company=$(Company);description=$(Description);copyright=$(Copyright);authors=$(Authors);version=$(PackageVersion);repositoryUrl=$(RepositoryUrl);releaseNotes=$(PackageReleaseNotes);repositoryType=$(RepositoryType);licenseExpression=$(PackageLicenseExpression);targetFramework=$(TargetFramework);configuration=$(Configuration);projectDir=$(MSBuildProjectDirectory);outputPath=$(OutputPath);packageFiles=$(IntermediateOutputPath)package</NuspecProperties>
+    </PropertyGroup>
+  </Target>
+  
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <ItemGroup>
+      <OutputFiles Include="$(OutputPath)\$(AssemblyName).m.dll;$(OutputPath)**\System*.dll;$(OutputPath)Sundew.Xaml.Optimization.dll" />
+    </ItemGroup>
+    <Copy SourceFiles="@(OutputFiles)" DestinationFiles="@(OutputFiles->'$(IntermediateOutputPath)\package\tools\%(RecursiveDir)%(Filename)%(Extension)')" ContinueOnError="False" />
+  </Target>
+  
 </Project>

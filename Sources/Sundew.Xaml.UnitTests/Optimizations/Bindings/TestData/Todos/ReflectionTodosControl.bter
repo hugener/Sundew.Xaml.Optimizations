@@ -1,0 +1,20 @@
+﻿BindingRootNode<ReflectionTodosControl>
+  Source:ReflectionTodosControl->DataContext<ITodosViewModel|N:Sundew.Xaml.Optimizations.TestData.Todos|A:Sundew.Xaml.Optimizations.TestData.ApiDesigner.Wpf|Alias:global>=Sundew.Xaml.Optimizations.TestData.Todos.ReflectionTodosControl.DataContext
+    Source:Grid->DataContext=Todos
+      ListBox(TodosListBox)->ItemsSource=.
+    Button->Command=AddCommand
+    Source:TextBox=ByElementName(TodoDescriptionTextBox)
+      Button->CommandParameter=Text, ElementName=TodoDescriptionTextBox
+    Button->Command=RemoveCommand
+    Source:ListBox=ByElementName(TodosListBox)
+      Button->CommandParameter=SelectedItems, ElementName=TodosListBox
+
+BindingRootNode<ITodo>
+  Source:Grid->DataContext<ITodo|N:Sundew.Xaml.Optimizations.TestData.Todos|A:Sundew.Xaml.Optimizations.TestData.ApiDesigner.Wpf|Alias:global>={http://schemas.microsoft.com/winfx/2006/xaml/presentation}Grid.DataContext
+    TextBlock->Text=Description
+    TextBox->Text=Description, UpdateSourceTrigger=PropertyChanged
+    CheckBox->IsChecked=IsDone
+    TextBlock->Text=Notes
+    TextBox->Text=Notes, UpdateSourceTrigger=LostFocus
+    TextBlock->Text=Created, Converter={testData:CultureInfoDateTimeConverter}, ConverterParameter=da-DK
+    TextBlock->Text=Completed, Converter={testData:CultureInfoDateTimeConverter}, ConverterParameter=da-DK

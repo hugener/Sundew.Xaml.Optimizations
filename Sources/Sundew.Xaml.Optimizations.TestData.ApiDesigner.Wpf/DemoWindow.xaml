@@ -1,0 +1,92 @@
+﻿<Window x:Class="Sundew.Xaml.Optimizations.TestData.DemoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:todos="clr-namespace:Sundew.Xaml.Optimizations.TestData.Todos"
+        xmlns:bouncer="clr-namespace:Sundew.Xaml.Optimizations.TestData.Bouncer"
+        xmlns:testData="clr-namespace:Sundew.Xaml.Optimizations.TestData"
+        mc:Ignorable="d"
+        Title="DemoWindow" 
+        Height="800" Width="1200"
+        d:DataContext="{d:DesignInstance d:Type=testData:DemoViewModel}">
+    <Grid>
+        <Menu Grid.ColumnSpan="2">
+            <MenuItem Header="Show readonly dependency properties" Command="{Binding ShowReadOnlyDependencyPropertiesCommand}"/>
+            <MenuItem Header="Show one way bound dependency properties" Command="{Binding ShowOneWayBoundDependencyPropertiesCommand}"/>
+        </Menu>
+        <Grid Grid.Row="1" DataContext="{Binding TodoDemo}">
+            <TextBlock FontSize="24" FontWeight="Bold">Todos Demo</TextBlock>
+            <Menu Grid.Row="1">
+                <MenuItem Header="Add many" Command="{Binding AddManyCommand}"/>
+                <MenuItem Header="Clear" Command="{Binding ClearCommand}"/>
+            </Menu>
+            <TextBlock Text="Compiled"  FontSize="16" FontWeight="Bold" Grid.Row="2"/>
+            <todos:CompiledTodosControl x:Name="CompiledTodosControl"  Grid.Row="3"/>
+            <TextBlock Text="Reflection" Grid.Row="4" FontSize="16" FontWeight="Bold"/>
+            <todos:ReflectionTodosControl x:Name="ReflectionTodosControl" Grid.Row="5"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+        </Grid>
+        <Grid DataContext="{Binding TrackerDemo}" Grid.Row="1" Grid.Column="1">
+            <TextBlock FontSize="24" FontWeight="Bold">Bouncer Demo</TextBlock>
+            <Menu  Grid.Row="1">
+                <MenuItem Header="Start both" Command="{Binding StartAnimationCommand}"/>
+                <MenuItem Header="Stop both" Command="{Binding StopAnimationCommand}"/>
+                <MenuItem Header="Reset both" Command="{Binding ResetCommand}"/>
+                <Slider Minimum="1" Maximum="1000" Value="{Binding Delay}" Width="80"/>
+                <TextBlock Text="{Binding Delay}"/>
+                <MenuItem Header="Benchmark" Command="{Binding BenchmarkCommand}"/>
+            </Menu>
+            <Grid Grid.Row="2">
+                <TextBlock Text="Compiled"  FontSize="16" FontWeight="Bold" />
+                <TextBlock FontSize="12" FontWeight="Bold" Grid.Column="1" TextAlignment="Right" Visibility="{Binding CompiledAnimationViewModel.BenchmarkTime, Converter={testData:NotNullToVisibilityConverter}}">
+                    <Run Text="Result"/>
+                    <Run Text="{Binding CompiledAnimationViewModel.BenchmarkTime, Mode=OneWay}"/>
+                </TextBlock>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+            <!--<bouncer:ReflectionBouncerControl x:Name="CompiledTrackerControl" DataContext="{Binding CompiledAnimationViewModel}" Grid.Row="3"/>-->
+            <bouncer:CompiledBouncerControl x:Name="CompiledTrackerControl" DataContext="{Binding CompiledAnimationViewModel}"  Grid.Row="3"/>
+            <Grid Grid.Row="4">
+                <TextBlock Text="Reflection"  FontSize="16" FontWeight="Bold" />
+                <TextBlock FontSize="12" FontWeight="Bold" Grid.Column="1" TextAlignment="Right" Visibility="{Binding ReflectionAnimationViewModel.BenchmarkTime, Converter={testData:NotNullToVisibilityConverter}}">
+                    <Run Text="Result"/>
+                    <Run Text="{Binding ReflectionAnimationViewModel.BenchmarkTime, Mode=OneWay}"/>
+                </TextBlock>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+            <bouncer:ReflectionBouncerControl x:Name="ReflectionTrackerControl" DataContext="{Binding ReflectionAnimationViewModel}" Grid.Row="5"/>
+            <!--<bouncer:CompiledBouncerControl x:Name="ReflectionTrackerControl" DataContext="{Binding ReflectionAnimationViewModel}"  Grid.Row="5"/>-->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+        </Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+    </Grid>
+</Window>

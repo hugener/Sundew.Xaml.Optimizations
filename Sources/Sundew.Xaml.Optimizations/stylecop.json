@@ -17,7 +17,10 @@
         "licenseFile": "LICENSE"
       },
       "documentInternalElements": false,
-      "documentInterfaces": false
+      "documentInterfaces": false,
+    },
+    "orderingRules": {
+      "usingDirectivesPlacement": "insideNamespace"
     }
   }
 }

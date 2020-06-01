@@ -12,7 +12,7 @@ namespace Sundew.Xaml.Optimizations.ResourceDictionary.Internal
     internal static class Constants
     {
         public const string SourceText = "Source";
-        public const string SystemResourceDictionaryMergedDictionariesSystemResourceDictionaryXPath = "//system:ResourceDictionary/system:ResourceDictionary.MergedDictionaries/system:ResourceDictionary";
+        public const string DefaultResourceDictionaryMergedDictionariesDefaultResourceDictionaryXPath = "//default:ResourceDictionary/default:ResourceDictionary.MergedDictionaries/default:ResourceDictionary";
         public const string UnsharedWpfText = "UnsharedWpf";
         public const string SxoPrefix = "sxo";
         public const string ResourceDictionaryName = "ResourceDictionary";

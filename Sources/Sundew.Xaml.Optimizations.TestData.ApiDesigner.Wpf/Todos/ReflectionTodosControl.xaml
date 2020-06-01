@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="Sundew.Xaml.Optimizations.TestData.Todos.ReflectionTodosControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:todos="clr-namespace:Sundew.Xaml.Optimizations.TestData.Todos"
+             xmlns:testData="clr-namespace:Sundew.Xaml.Optimizations.TestData"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance d:Type=todos:ITodosViewModel}">
+    <Grid>
+        <Grid DataContext="{Binding Todos}">
+            <ListBox x:Name="TodosListBox" ItemsSource="{ Binding }" SelectionMode="Multiple" VirtualizingPanel.VirtualizationMode="Recycling">
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="{x:Type todos:ITodo}">
+                        <Grid>
+                            <TextBlock Text="{Binding Description}" Grid.Column="0"/>
+                            <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
+                            <CheckBox IsChecked="{Binding IsDone}" Grid.Column="2" />
+                            <TextBlock Text="{Binding Notes}" Grid.Column="0" Grid.Row="1"/>
+                            <TextBox Text="{Binding Notes, UpdateSourceTrigger=LostFocus}" Grid.Column="1" Grid.Row="1"/>
+                            <TextBlock Text="{Binding Created, Converter={testData:CultureInfoDateTimeConverter}, ConverterParameter=da-DK}" Grid.Row="2"/>
+                            <TextBlock Text="{Binding Completed, Converter={testData:CultureInfoDateTimeConverter}, ConverterParameter=da-DK}" Grid.Column="1" Grid.Row="2"/>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+        <Grid Grid.Row="1">
+            <TextBox x:Name="TodoDescriptionTextBox" />
+            <Button Command="{Binding AddCommand}" CommandParameter="{Binding ElementName=TodoDescriptionTextBox, Path=Text}" Content="Add" Grid.Column="1"/>
+            <Button Command="{Binding RemoveCommand}" CommandParameter="{Binding ElementName=TodosListBox, Path=SelectedItems}" Content="Remove" Grid.Column="2"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+        </Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+    </Grid>
+</UserControl>

@@ -1,0 +1,19 @@
+﻿BindingRootNode<ReflectionBouncerControl>
+  Source:ReflectionBouncerControl->DataContext<AnimationViewModel|N:Sundew.Xaml.Optimizations.TestData.Bouncer|A:Sundew.Xaml.Optimizations.TestData.ApiDesigner.Wpf|Alias:global>=Sundew.Xaml.Optimizations.TestData.Bouncer.ReflectionBouncerControl.DataContext
+    Canvas->ActualSize.ActualWidth=Width
+    Canvas->ActualSize.ActualHeight=Height
+    Ellipse(ReflectionEllipse)->Width=Ellipse.Width
+    Ellipse(ReflectionEllipse)->Height=Ellipse.Height
+    Ellipse(ReflectionEllipse)->Canvas.Left=Ellipse.X
+    Ellipse(ReflectionEllipse)->Canvas.Top=Ellipse.Y
+    Rectangle(ReflectionRectangle)->Width=Rectangle.Width
+    Rectangle(ReflectionRectangle)->Height=Rectangle.Height
+    Rectangle(ReflectionRectangle)->Canvas.Left=Rectangle.X
+    Rectangle(ReflectionRectangle)->Canvas.Top=Rectangle.Y
+    Polygon(ReflectionPolygon)->Width=Triangle.Width
+    Polygon(ReflectionPolygon)->Height=Triangle.Height
+    Polygon(ReflectionPolygon)->Canvas.Left=Triangle.X
+    Polygon(ReflectionPolygon)->Canvas.Top=Triangle.Y
+    Run(Run1)->Text=Frame
+    Button(Button1)->Command=StartCommand
+    Button(Button2)->Command=StopCommand

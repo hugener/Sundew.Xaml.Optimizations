@@ -11,7 +11,6 @@ namespace Sundew.Xaml.UnitTests
 
     using System;
     using System.Linq;
-    using System.Windows;
     using FluentAssertions;
     using Xunit;
     using ResourceDictionary = sx::Sundew.Xaml.Optimizations.ResourceDictionary;
@@ -20,10 +19,7 @@ namespace Sundew.Xaml.UnitTests
     {
         static ResourceDictionaryTests()
         {
-            if (Application.Current == null)
-            {
-                new Application();
-            }
+            WpfApplication.Initialize();
         }
 
         [Fact]

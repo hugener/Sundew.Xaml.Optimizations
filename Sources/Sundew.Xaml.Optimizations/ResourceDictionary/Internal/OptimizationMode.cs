@@ -15,7 +15,7 @@ namespace Sundew.Xaml.Optimizations.ResourceDictionary.Internal
         /// <summary>
         /// Indicates no optimization should be applied.
         /// </summary>
-        None,
+        TVoid,
 
         /// <summary>
         /// Indicates that shared resource dictionary optimization should be applied.

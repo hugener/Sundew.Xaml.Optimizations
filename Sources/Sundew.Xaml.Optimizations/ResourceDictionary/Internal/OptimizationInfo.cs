@@ -16,7 +16,7 @@ namespace Sundew.Xaml.Optimizations.ResourceDictionary.Internal
         /// Initializes a new instance of the <see cref="OptimizationInfo"/> class.
         /// </summary>
         /// <param name="optimizationMode">The optimization mode.</param>
-        /// <param name="source">The source.</param>
+        /// <param name="source">The binding.</param>
         public OptimizationInfo(OptimizationMode optimizationMode, string source)
         {
             this.OptimizationMode = optimizationMode;
@@ -32,10 +32,10 @@ namespace Sundew.Xaml.Optimizations.ResourceDictionary.Internal
         public OptimizationMode OptimizationMode { get; }
 
         /// <summary>
-        /// Gets the source.
+        /// Gets the binding.
         /// </summary>
         /// <value>
-        /// The source.
+        /// The binding.
         /// </value>
         public string Source { get; }
     }

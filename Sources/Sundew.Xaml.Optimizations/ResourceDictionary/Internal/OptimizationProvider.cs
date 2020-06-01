@@ -31,25 +31,25 @@ namespace Sundew.Xaml.Optimizations.ResourceDictionary.Internal
                 var sourceAttribute = resourceDictionaryElement.Attribute(Constants.SourceText);
                 if (sourceAttribute == null)
                 {
-                    return new OptimizationInfo(OptimizationMode.None, null);
+                    return new OptimizationInfo(OptimizationMode.TVoid, null);
                 }
 
                 var match = Constants.UriRegex.Match(sourceAttribute.Value);
                 if (!match.Success)
                 {
-                    return new OptimizationInfo(OptimizationMode.None, null);
+                    return new OptimizationInfo(OptimizationMode.TVoid, null);
                 }
 
                 var unsharedWpfGroup = match.Groups[Constants.UnsharedWpfText];
                 if (unsharedWpfGroup.Success)
                 {
-                    return new OptimizationInfo(OptimizationMode.None, null);
+                    return new OptimizationInfo(OptimizationMode.TVoid, null);
                 }
 
                 return new OptimizationInfo(OptimizationMode.Shared, match.Value);
             }
 
-            return new OptimizationInfo(OptimizationMode.None, null);
+            return new OptimizationInfo(OptimizationMode.TVoid, null);
         }
     }
 }

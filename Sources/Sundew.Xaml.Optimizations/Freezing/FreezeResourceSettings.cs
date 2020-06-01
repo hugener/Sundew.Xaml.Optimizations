@@ -11,7 +11,7 @@ namespace Sundew.Xaml.Optimizations.Freezing
     using System.ComponentModel;
     using Newtonsoft.Json;
 
-    /// <summary>Settings for <see cref="FreezeResourceOptimizer"/>.</summary>
+    /// <summary>Settings for <see cref="FreezeResourceOptimization"/>.</summary>
     public class FreezeResourceSettings
     {
         /// <summary>Initializes a new instance of the <see cref="FreezeResourceSettings"/> class.</summary>

@@ -7,7 +7,6 @@
 
 namespace Sundew.Xaml.UnitTests.Optimizations.Freezing
 {
-    using System.IO;
     using System.Xml.Linq;
     using FluentAssertions;
     using Sundew.Xaml.Optimization;
@@ -46,11 +45,11 @@ namespace Sundew.Xaml.UnitTests.Optimizations.Freezing
     <SolidColorBrush x:Key=""AccentBrush"" Color=""#AAAAAA"" po:Freeze=""True"" />
     <SolidColorBrush x:Key=""BackgroundBrush"" po:Freeze=""False"" Color=""#111111"" />
 </ResourceDictionary>";
-            var testee = new FreezeResourceOptimizer(this.xamlPlatformInfo, new FreezeResourceSettings());
+            var testee = new FreezeResourceOptimization(this.xamlPlatformInfo, new FreezeResourceSettings());
 
-            var result = testee.Optimize(XDocument.Parse(input), new FileInfo(@"c:\afile.xaml"), new DirectoryInfo(@"c:\adirectory"), null);
+            var result = testee.Optimize(XDocument.Parse(input), null);
 
-            result.Value.XDocument.ToString().Should().Be(XDocument.Parse(expectedResult).ToString());
+            result.XDocument.ToString().Should().Be(XDocument.Parse(expectedResult).ToString());
         }
 
         [Fact]
@@ -72,11 +71,11 @@ namespace Sundew.Xaml.UnitTests.Optimizations.Freezing
     <SolidColorBrush x:Key=""AccentBrush"" Color=""#AAAAAA"" po:Freeze=""True"" />
     <SolidColorBrush x:Key=""AccentBrush2"" Color=""#AAAAAA"" po:Freeze=""True"" />
 </ResourceDictionary>";
-            var testee = new FreezeResourceOptimizer(this.xamlPlatformInfo, new FreezeResourceSettings());
+            var testee = new FreezeResourceOptimization(this.xamlPlatformInfo, new FreezeResourceSettings());
 
-            var result = testee.Optimize(XDocument.Parse(input), new FileInfo(@"c:\afile.xaml"), new DirectoryInfo(@"c:\adirectory"), null);
+            var result = testee.Optimize(XDocument.Parse(input), null);
 
-            result.Value.XDocument.ToString().Should().Be(XDocument.Parse(expectedResult).ToString());
+            result.XDocument.ToString().Should().Be(XDocument.Parse(expectedResult).ToString());
         }
 
         [Fact]
@@ -101,11 +100,11 @@ namespace Sundew.Xaml.UnitTests.Optimizations.Freezing
     <SolidColorBrush x:Key=""AccentBrush"" Color=""#AAAAAA"" po:Freeze=""True"" />
     <SolidColorBrush x:Key=""AccentBrush2"" Color=""#AAAAAA"" po:Freeze=""True"" />
 </ResourceDictionary>";
-            var testee = new FreezeResourceOptimizer(this.xamlPlatformInfo, new FreezeResourceSettings());
+            var testee = new FreezeResourceOptimization(this.xamlPlatformInfo, new FreezeResourceSettings());
 
-            var result = testee.Optimize(XDocument.Parse(input), new FileInfo(@"c:\afile.xaml"), new DirectoryInfo(@"c:\adirectory"), null);
+            var result = testee.Optimize(XDocument.Parse(input), null);
 
-            result.Value.XDocument.ToString().Should().Be(XDocument.Parse(expectedResult).ToString());
+            result.XDocument.ToString().Should().Be(XDocument.Parse(expectedResult).ToString());
         }
 
         [Fact]
@@ -128,11 +127,11 @@ namespace Sundew.Xaml.UnitTests.Optimizations.Freezing
     <SolidColorBrush x:Key=""AccentBrush"" Color=""#AAAAAA"" po:Freeze=""True"" />
     <SolidColorBrush x:Key=""AccentBrush2"" Color=""#AAAAAA"" po:Freeze=""True"" />
 </ResourceDictionary>";
-            var testee = new FreezeResourceOptimizer(this.xamlPlatformInfo, new FreezeResourceSettings(true));
+            var testee = new FreezeResourceOptimization(this.xamlPlatformInfo, new FreezeResourceSettings(true));
 
-            var result = testee.Optimize(XDocument.Parse(input), new FileInfo(@"c:\afile.xaml"), new DirectoryInfo(@"c:\adirectory"), null);
+            var result = testee.Optimize(XDocument.Parse(input), null);
 
-            result.Value.XDocument.ToString().Should().Be(XDocument.Parse(expectedResult).ToString());
+            result.XDocument.ToString().Should().Be(XDocument.Parse(expectedResult).ToString());
         }
 
         [Fact]
@@ -158,11 +157,11 @@ namespace Sundew.Xaml.UnitTests.Optimizations.Freezing
     <SolidColorBrush x:Key=""AccentBrush"" Color=""#AAAAAA"" po:Freeze=""True"" />
     <SolidColorBrush x:Key=""AccentBrush2"" Color=""#AAAAAA"" po:Freeze=""True"" />
 </ResourceDictionary>";
-            var testee = new FreezeResourceOptimizer(this.xamlPlatformInfo, new FreezeResourceSettings());
+            var testee = new FreezeResourceOptimization(this.xamlPlatformInfo, new FreezeResourceSettings());
 
-            var result = testee.Optimize(XDocument.Parse(input), new FileInfo(@"c:\afile.xaml"), new DirectoryInfo(@"c:\adirectory"), null);
+            var result = testee.Optimize(XDocument.Parse(input), null);
 
-            result.Value.XDocument.ToString().Should().Be(XDocument.Parse(expectedResult).ToString());
+            result.XDocument.ToString().Should().Be(XDocument.Parse(expectedResult).ToString());
         }
 
         [Fact]
@@ -189,11 +188,11 @@ namespace Sundew.Xaml.UnitTests.Optimizations.Freezing
     <SolidColorBrush x:Key=""AccentBrush"" Color=""#AAAAAA"" po:Freeze=""True"" />
     <SolidColorBrush x:Key=""AccentBrush2"" Color=""#AAAAAA"" po:Freeze=""True"" />
 </ResourceDictionary>";
-            var testee = new FreezeResourceOptimizer(this.xamlPlatformInfo, new FreezeResourceSettings());
+            var testee = new FreezeResourceOptimization(this.xamlPlatformInfo, new FreezeResourceSettings());
 
-            var result = testee.Optimize(XDocument.Parse(input), new FileInfo(@"c:\afile.xaml"), new DirectoryInfo(@"c:\adirectory"), null);
+            var result = testee.Optimize(XDocument.Parse(input), null);
 
-            result.Value.XDocument.ToString().Should().Be(XDocument.Parse(expectedResult).ToString());
+            result.XDocument.ToString().Should().Be(XDocument.Parse(expectedResult).ToString());
         }
 
         [Fact]
@@ -220,11 +219,11 @@ namespace Sundew.Xaml.UnitTests.Optimizations.Freezing
     <SolidColorBrush x:Key=""AccentBrush"" Color=""#AAAAAA"" po1:Freeze=""True"" />
     <SolidColorBrush x:Key=""AccentBrush2"" Color=""#AAAAAA"" po1:Freeze=""True"" />
 </ResourceDictionary>";
-            var testee = new FreezeResourceOptimizer(this.xamlPlatformInfo, new FreezeResourceSettings());
+            var testee = new FreezeResourceOptimization(this.xamlPlatformInfo, new FreezeResourceSettings());
 
-            var result = testee.Optimize(XDocument.Parse(input), new FileInfo(@"c:\afile.xaml"), new DirectoryInfo(@"c:\adirectory"), null);
+            var result = testee.Optimize(XDocument.Parse(input), null);
 
-            result.Value.XDocument.ToString().Should().Be(XDocument.Parse(expectedResult).ToString());
+            result.XDocument.ToString().Should().Be(XDocument.Parse(expectedResult).ToString());
         }
 
         [Fact]
@@ -263,11 +262,11 @@ namespace Sundew.Xaml.UnitTests.Optimizations.Freezing
         </Grid>
     </DataTemplate>
 </ResourceDictionary>";
-            var testee = new FreezeResourceOptimizer(this.xamlPlatformInfo, new FreezeResourceSettings());
+            var testee = new FreezeResourceOptimization(this.xamlPlatformInfo, new FreezeResourceSettings());
 
-            var result = testee.Optimize(XDocument.Parse(input), new FileInfo(@"c:\afile.xaml"), new DirectoryInfo(@"c:\adirectory"), null);
+            var result = testee.Optimize(XDocument.Parse(input), null);
 
-            result.Value.XDocument.ToString().Should().Be(XDocument.Parse(expectedResult).ToString());
+            result.XDocument.ToString().Should().Be(XDocument.Parse(expectedResult).ToString());
         }
 
         [Fact]
@@ -302,11 +301,11 @@ namespace Sundew.Xaml.UnitTests.Optimizations.Freezing
         </Grid>
     </DataTemplate>
 </ResourceDictionary>";
-            var testee = new FreezeResourceOptimizer(this.xamlPlatformInfo, new FreezeResourceSettings());
+            var testee = new FreezeResourceOptimization(this.xamlPlatformInfo, new FreezeResourceSettings());
 
-            var result = testee.Optimize(XDocument.Parse(input), new FileInfo(@"c:\afile.xaml"), new DirectoryInfo(@"c:\adirectory"), null);
+            var result = testee.Optimize(XDocument.Parse(input), null);
 
-            result.Value.XDocument.ToString().Should().Be(XDocument.Parse(expectedResult).ToString());
+            result.XDocument.ToString().Should().Be(XDocument.Parse(expectedResult).ToString());
         }
 
         [Theory]
@@ -336,11 +335,11 @@ namespace Sundew.Xaml.UnitTests.Optimizations.Freezing
         <SolidColorBrush x:Key=""AccentBrush2"" Color=""#AAAAAA"" po:Freeze=""True"" />
     </{rootType}.Resources>
 </{rootType}>";
-            var testee = new FreezeResourceOptimizer(this.xamlPlatformInfo, new FreezeResourceSettings());
+            var testee = new FreezeResourceOptimization(this.xamlPlatformInfo, new FreezeResourceSettings());
 
-            var result = testee.Optimize(XDocument.Parse(input), new FileInfo(@"c:\afile.xaml"), new DirectoryInfo(@"c:\adirectory"), null);
+            var result = testee.Optimize(XDocument.Parse(input), null);
 
-            result.Value.XDocument.ToString().Should().Be(XDocument.Parse(expectedResult).ToString());
+            result.XDocument.ToString().Should().Be(XDocument.Parse(expectedResult).ToString());
         }
 
         [Theory]
@@ -374,11 +373,11 @@ namespace Sundew.Xaml.UnitTests.Optimizations.Freezing
         </ResourceDictionary>
     </{rootType}.Resources>
 </{rootType}>";
-            var testee = new FreezeResourceOptimizer(this.xamlPlatformInfo, new FreezeResourceSettings());
+            var testee = new FreezeResourceOptimization(this.xamlPlatformInfo, new FreezeResourceSettings());
 
-            var result = testee.Optimize(XDocument.Parse(input), new FileInfo(@"c:\afile.xaml"), new DirectoryInfo(@"c:\adirectory"), null);
+            var result = testee.Optimize(XDocument.Parse(input), null);
 
-            result.Value.XDocument.ToString().Should().Be(XDocument.Parse(expectedResult).ToString());
+            result.XDocument.ToString().Should().Be(XDocument.Parse(expectedResult).ToString());
         }
 
         [Theory]
@@ -415,11 +414,11 @@ namespace Sundew.Xaml.UnitTests.Optimizations.Freezing
         </Grid.Resources>
     </Grid>
 </{rootType}>";
-            var testee = new FreezeResourceOptimizer(this.xamlPlatformInfo, new FreezeResourceSettings());
+            var testee = new FreezeResourceOptimization(this.xamlPlatformInfo, new FreezeResourceSettings());
 
-            var result = testee.Optimize(XDocument.Parse(input), new FileInfo(@"c:\afile.xaml"), new DirectoryInfo(@"c:\adirectory"), null);
+            var result = testee.Optimize(XDocument.Parse(input), null);
 
-            result.Value.XDocument.ToString().Should().Be(XDocument.Parse(expectedResult).ToString());
+            result.XDocument.ToString().Should().Be(XDocument.Parse(expectedResult).ToString());
         }
 
         [Theory]
@@ -452,11 +451,11 @@ namespace Sundew.Xaml.UnitTests.Optimizations.Freezing
         </Grid.Resources>
     </Grid>
 </{rootType}>";
-            var testee = new FreezeResourceOptimizer(this.xamlPlatformInfo, new FreezeResourceSettings());
+            var testee = new FreezeResourceOptimization(this.xamlPlatformInfo, new FreezeResourceSettings());
 
-            var result = testee.Optimize(XDocument.Parse(input), new FileInfo(@"c:\afile.xaml"), new DirectoryInfo(@"c:\adirectory"), null);
+            var result = testee.Optimize(XDocument.Parse(input), null);
 
-            result.Value.XDocument.ToString().Should().Be(XDocument.Parse(expectedResult).ToString());
+            result.XDocument.ToString().Should().Be(XDocument.Parse(expectedResult).ToString());
         }
     }
 }
